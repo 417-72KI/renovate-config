@@ -19,6 +19,7 @@ jobs:
         with:
           name: validation-result
           path: validation-result.txt
+          retention-days: 7
       - name: Dump result as a comment
         uses: actions/github-script@v6
         if: ${{ github.event_name == 'pull_request' && always() }}
