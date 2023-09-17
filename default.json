@@ -5,9 +5,10 @@
         "github>417-72KI/renovate-config:automerge",
         "github>417-72KI/renovate-config:schedule"
     ],
-    "labels": [
-        "dependencies"
-    ],
+    "labels": ["dependencies"],
+    "vulnerabilityAlerts": {
+        "labels": ["security"]
+    },
     "packageRules": [
         {
             "matchManagers": ["swift"],
