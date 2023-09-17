@@ -1,0 +1,50 @@
+name: Validate renovate config
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    container:
+      image: renovate/renovate:latest
+      options: --user root
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate config files
+        id: validate
+        run: renovate-config-validator *.json* > validation-result.txt
+      - uses: actions/upload-artifact@v3
+        if: ${{ always() }}
+        with:
+          name: validation-result
+          path: validation-result.txt
+      - name: Dump result as a comment
+        uses: actions/github-script@v6
+        if: ${{ github.event_name == 'pull_request' && always() }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const comments = await github.rest.issues.listComments({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+            })
+            const ids = comments.data
+              .filter(e => e.user.id == 41898282)
+              .map(e => e.id)
+            await Promise.all(ids.map(async (id) => {
+              github.rest.issues.deleteComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: id,
+              })
+            }))
+            const fs = require("fs").promises
+            const result = await fs.readFile('validation-result.txt', 'utf8')
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: "## Renovate config validation result\n```sh\n" + result.trimEnd() + "\n```"
+            })
