@@ -14,7 +14,7 @@ jobs:
       - name: Validate config files
         id: validate
         run: renovate-config-validator *.json* > validation-result.txt
-      - uses: actions/upload-artifact@v3
+      - uses: actions/upload-artifact@v4
         if: ${{ always() }}
         with:
           name: validation-result
