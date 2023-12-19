@@ -13,6 +13,12 @@
         {
             "matchManagers": ["swift"],
             "extractVersion": "^v?(?<version>.*)"
+        },
+        {
+            "groupName": "Artifact actions",
+            "matchManagers": ["github-actions"],
+            "matchPackageNames": ["actions/*-artifact"],
+            "matchUpdateTypes": ["major"]
         }
     ]
 }
