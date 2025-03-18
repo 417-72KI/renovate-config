@@ -1,7 +1,6 @@
 {
     "extends": [
         "config:recommended",
-        "config:pinDigestsDisabled",
         "github>hatena/renovate-config",
         "github>417-72KI/renovate-config:automerge",
         "github>417-72KI/renovate-config:schedule"
