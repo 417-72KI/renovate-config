@@ -9,6 +9,7 @@
     "vulnerabilityAlerts": {
         "labels": ["security"]
     },
+    "pinDigests": false,
     "packageRules": [
         {
             "matchManagers": ["swift"],
