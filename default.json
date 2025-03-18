@@ -13,6 +13,9 @@
     "pin": {
         "enabled": false
     },
+    "pinDigest": {
+        "enabled": false
+    },
     "pinDigests": false,
     "packageRules": [
         {
