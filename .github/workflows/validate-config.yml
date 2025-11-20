@@ -10,7 +10,7 @@ jobs:
       image: renovate/renovate:latest
       options: --user root
     steps:
-      - uses: actions/checkout@v5
+      - uses: actions/checkout@v6
       - name: Validate config files
         id: validate
         run: renovate-config-validator *.json* > validation-result.txt
