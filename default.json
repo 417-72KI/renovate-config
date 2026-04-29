@@ -9,23 +9,17 @@
     "vulnerabilityAlerts": {
         "labels": ["security"]
     },
-    "pin": {
-        "enabled": false
-    },
-    "pinDigest": {
-        "enabled": false
-    },
-    "pinDigests": false,
     "packageRules": [
         {
             "matchManagers": ["swift"],
-            "extractVersion": "^v?(?<version>.*)"
-        },
-        {
-            "groupName": "Artifact actions",
-            "matchManagers": ["github-actions"],
-            "matchPackageNames": ["actions/*-artifact"],
-            "matchUpdateTypes": ["major"]
+            "extractVersion": "^v?(?<version>.*)",
+            "pin": {
+                "enabled": false
+            },
+            "pinDigest": {
+                "enabled": false
+            },
+            "pinDigests": false
         }
     ]
 }
