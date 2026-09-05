@@ -7,21 +7,21 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     container:
-      image: renovate/renovate:latest
+      image: renovate/renovate:latest@sha256:4e10f76a79f1c597f427f83c788a9f5b14a6295784c4cb68307b89b0a954abce
       options: --user root
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       - name: Validate config files
         id: validate
         run: renovate-config-validator *.json* > validation-result.txt
-      - uses: actions/upload-artifact@v7
+      - uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7
         if: ${{ always() }}
         with:
           name: validation-result
           path: validation-result.txt
           retention-days: 7
       - name: Dump result as a comment
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         if: ${{ github.event_name == 'pull_request' && always() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
