@@ -7,7 +7,7 @@ jobs:
   validate:
     runs-on: ubuntu-latest
     container:
-      image: renovate/renovate:latest
+      image: renovate/renovate:latest@sha256:4a93eba384999995555d48ff194d5013230fe44142260292cdaf9e7bd45ed949
       options: --user root
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
@@ -21,7 +21,7 @@ jobs:
           path: validation-result.txt
           retention-days: 7
       - name: Dump result as a comment
-        uses: actions/github-script@v9
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9
         if: ${{ github.event_name == 'pull_request' && always() }}
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
